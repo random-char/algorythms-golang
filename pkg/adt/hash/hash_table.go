@@ -6,10 +6,9 @@ import (
 )
 
 type HashTable struct {
-	array       []HashTableList
-	arrayLength int
-	count       int
-	hashFunc    func(int) int
+	array    []HashTableList
+	count    int
+	hashFunc func(int) int
 }
 
 func NewHashTable() *HashTable {
@@ -21,8 +20,7 @@ func NewHashTable() *HashTable {
 	}
 
 	ht := HashTable{
-		arrayLength: length,
-		array:       array,
+		array: array,
 	}
 
 	ht.generateAndSetNewHashFunction()
@@ -31,7 +29,7 @@ func NewHashTable() *HashTable {
 }
 
 func (ht *HashTable) ToString() string {
-	s := "-------------------------------"
+	s := "-------------------------------\n"
 	for i, hashTableList := range ht.array {
 		s += fmt.Sprintf("%d)->", i)
 
@@ -100,6 +98,7 @@ func (ht *HashTable) Put(key, value int) {
 	keyHash := ht.hashFunc(key)
 	ht.array[keyHash].PushBack(key, value)
 	ht.count++
+	ht.rehashIfNeeded()
 }
 
 func (ht *HashTable) Get(key int) (int, error) {
@@ -108,9 +107,28 @@ func (ht *HashTable) Get(key int) (int, error) {
 }
 
 func (ht *HashTable) rehashIfNeeded() {
-	//change size
-	//change hashing function
-	//recalculate hashes and store in new array
+	squaredLen := len(ht.array) * len(ht.array)
+	if squaredLen > ht.count {
+		return
+	}
+
+	oldArray := ht.array
+
+	newArray := make([]HashTableList, squaredLen)
+	for i := 0; i < squaredLen; i++ {
+		newArray[i] = HashTableList{}
+	}
+
+	ht.array = newArray
+	ht.generateAndSetNewHashFunction()
+
+	for _, hashTableList := range oldArray {
+		node := hashTableList.head
+		for node != nil {
+			ht.Put(node.key, node.value)
+			node = node.next
+		}
+	}
 }
 
 func (ht *HashTable) generateAndSetNewHashFunction() {

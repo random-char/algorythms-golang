@@ -9,16 +9,18 @@ import (
 func main() {
 	ht := hash.NewHashTable()
 
-	ht.Put(1, 1)
-	ht.ToString()
-	ht.Put(100, 123)
-	ht.ToString()
-	ht.Put(10, 10)
-	ht.ToString()
-	ht.Put(11, 11)
-	ht.ToString()
+	data := map[int]int{}
+	for i := 0; i < 1000; i++ {
+		data[i] = i
+	}
+
+	for k, v := range data {
+		ht.Put(k, v)
+		fmt.Println(ht.ToString())
+	}
 
 	fmt.Println(ht.Get(100))
+	return
 
 	list := list.NewLinkedList()
 	list.PushBack(1)
