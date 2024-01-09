@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func AbstractSortingTester(t *testing.T, sortingFunc func([]int)) {
+func AbstractSortingTester(t *testing.T, sortingFunc func([]int) []int) {
 	arrays := [][]int{
 		{2, 4, 1, 6, 8, 9, 0, 3, 5, 7},
 		{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
@@ -12,11 +12,11 @@ func AbstractSortingTester(t *testing.T, sortingFunc func([]int)) {
 	}
 
 	for _, array := range arrays {
-		sortingFunc(array)
+		result := sortingFunc(array)
 
-		for i := 1; i < len(array); i++ {
-			if array[i-1] > array[i] {
-				t.Errorf("wrong order: %d before %d", array[i-1], array[i])
+		for i := 1; i < len(result); i++ {
+			if result[i-1] > result[i] {
+				t.Errorf("wrong order: %d before %d", result[i-1], result[i])
 			}
 		}
 	}

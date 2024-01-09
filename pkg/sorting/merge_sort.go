@@ -1,9 +1,9 @@
 package sorting
 
-func MergeSort(array []int) {
+func MergeSort(array []int) []int {
 	length := len(array)
 	if length < 2 {
-		return
+		return array
 	}
 
 	mid := length / 2
@@ -31,4 +31,6 @@ func MergeSort(array []int) {
 
 		array[i] = inserting
 	}
+
+	return array
 }

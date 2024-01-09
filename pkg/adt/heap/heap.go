@@ -2,6 +2,7 @@ package heap
 
 import (
 	adtError "algorythms-golang/pkg/adt/error"
+	"fmt"
 )
 
 type MaxHeap struct {
@@ -14,6 +15,19 @@ func NewHeap() MaxHeap {
 		array:  make([]int, 10),
 		length: 0,
 	}
+}
+
+func Heapify(array []int) MaxHeap {
+	mh := MaxHeap{
+		array:  make([]int, len(array)),
+		length: 0,
+	}
+
+	for _, a := range array {
+		mh.Insert(a)
+	}
+	fmt.Println(mh.array)
+	return mh
 }
 
 func (h *MaxHeap) Insert(value int) error {
@@ -38,6 +52,32 @@ func (h *MaxHeap) RemoveMax() (int, error) {
 	h.fixDown(0)
 
 	return h.array[h.length], nil
+}
+
+func (h *MaxHeap) GetArray() []int {
+	var a []int
+	copy(h.array, a)
+	return a
+}
+
+func (h *MaxHeap) GetSortedMaxArray() []int {
+	a := make([]int, len(h.array))
+	i := 0
+	for val, err := h.RemoveMax(); err != nil; i++ {
+		a[i] = val
+	}
+
+	return a
+}
+
+func (h *MaxHeap) GetSortedMinArray() []int {
+	a := make([]int, len(h.array))
+	i := len(h.array) - 1
+	for val, err := h.RemoveMax(); err != nil; i-- {
+		a[i] = val
+	}
+
+	return a
 }
 
 func (h *MaxHeap) fixUp(index int) {

@@ -1,12 +1,12 @@
 package sorting
 
-func QuickSort(array []int) {
-	quickSortRecursive(array, 0, len(array)-1)
+func QuickSort(array []int) []int {
+	return quickSortRecursive(array, 0, len(array)-1)
 }
 
-func quickSortRecursive(array []int, firstIndex, lastIndex int) {
+func quickSortRecursive(array []int, firstIndex, lastIndex int) []int {
 	if firstIndex >= lastIndex {
-		return
+		return array
 	}
 
 	pivot := array[firstIndex]
@@ -22,6 +22,8 @@ func quickSortRecursive(array []int, firstIndex, lastIndex int) {
 	swap(array, firstIndex, pos)
 	quickSortRecursive(array, firstIndex, pos-1)
 	quickSortRecursive(array, pos+1, lastIndex)
+
+	return array
 }
 
 func swap(array []int, i, j int) {

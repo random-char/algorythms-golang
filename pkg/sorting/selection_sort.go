@@ -1,6 +1,6 @@
 package sorting
 
-func SelectionSort(array []int) {
+func SelectionSort(array []int) []int {
 	for i := 0; i < len(array); i++ {
 		j := findIndexOfSmallestEl(array, i)
 
@@ -8,6 +8,8 @@ func SelectionSort(array []int) {
 		array[i] = array[j]
 		array[j] = tmp
 	}
+
+	return array
 }
 
 func findIndexOfSmallestEl(array []int, from int) int {
