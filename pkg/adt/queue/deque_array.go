@@ -11,11 +11,15 @@ type DequeArray[T int] struct {
 
 func NewDequeArray[T int]() DequeArray[T] {
 	return DequeArray[T]{
-		array:  make([]T, 1),
+		array:  make([]T, 10),
 		start:  0,
 		end:    0,
 		length: 0,
 	}
+}
+
+func (d *DequeArray[T]) Empty() bool {
+	return d.length == 0
 }
 
 func (d *DequeArray[T]) Get(i int) (T, error) {
@@ -48,7 +52,7 @@ func (d *DequeArray[T]) PushFront(value T) {
 func (d *DequeArray[T]) PopBack() (T, error) {
 	var result T
 
-	if d.length == 0 {
+	if d.Empty() {
 		return result, &adtError.EmptyListError{}
 	}
 
@@ -64,7 +68,7 @@ func (d *DequeArray[T]) PopBack() (T, error) {
 func (d *DequeArray[T]) PopFront() (T, error) {
 	var result T
 
-	if d.length == 0 {
+	if d.Empty() {
 		return result, &adtError.EmptyListError{}
 	}
 

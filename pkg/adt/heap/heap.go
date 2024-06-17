@@ -2,7 +2,6 @@ package heap
 
 import (
 	adtError "algorythms-golang/pkg/adt/error"
-	"fmt"
 )
 
 type MaxHeap struct {
@@ -26,7 +25,7 @@ func Heapify(array []int) MaxHeap {
 	for _, a := range array {
 		mh.Insert(a)
 	}
-	fmt.Println(mh.array)
+
 	return mh
 }
 

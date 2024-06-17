@@ -3,7 +3,7 @@ package error
 type EmptyListError struct{}
 
 func (e *EmptyListError) Error() string {
-	return "Empty list"
+	return "List is empty"
 }
 
 type OutOfBoundsError struct{}
@@ -22,4 +22,10 @@ type HeapIsFullError struct{}
 
 func (e *HeapIsFullError) Error() string {
 	return "Heap is full"
+}
+
+type EmptyGraphError struct{}
+
+func (e *EmptyGraphError) Error() string {
+	return "Graph is empty"
 }
