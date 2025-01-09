@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func PushAndPopWithAbstractList[T int](t *testing.T, list list.DynamicList[T]) {
+func PushAndPopWithAbstractList[T int](t *testing.T, list list.List[T]) {
 	var val T
 	var err error
 
@@ -62,7 +62,7 @@ func PushAndPopWithAbstractList[T int](t *testing.T, list list.DynamicList[T]) {
 	}
 }
 
-func GetElementFromAbstractList[T int](t *testing.T, list list.DynamicList[T]) {
+func GetElementFromAbstractList[T int](t *testing.T, list list.List[T]) {
 	var val T
 	var err error
 
@@ -87,7 +87,7 @@ func GetElementFromAbstractList[T int](t *testing.T, list list.DynamicList[T]) {
 	}
 }
 
-func PushOneSideAndPopFromOther[T int](t *testing.T, list list.DynamicList[T]) {
+func PushOneSideAndPopFromOther[T int](t *testing.T, list list.List[T]) {
 	for i := 1; i <= 20; i++ {
 		list.PushBack(T(i))
 	}

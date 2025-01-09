@@ -1,6 +1,6 @@
 package list
 
-type DynamicList[T int] interface {
+type List[T int] interface {
 	Get(int) (T, error)
 	PushBack(T)
 	PushFront(T)

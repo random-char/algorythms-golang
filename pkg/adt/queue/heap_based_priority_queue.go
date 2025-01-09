@@ -1,7 +1,9 @@
-package heap
+package queue
+
+import "algorythms-golang/pkg/adt/heap"
 
 type PriorityQueue struct {
-	heap MaxHeap
+	heap heap.MaxHeap
 }
 
 func (pq *PriorityQueue) Enque(value int) {
